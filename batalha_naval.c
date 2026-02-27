@@ -1,55 +1,61 @@
 #include <stdio.h>
 
 /**
- * Desafio: Posicionando Navios no Tabuleiro (Nível Novato)
- * Objetivo: Representar um tabuleiro 10x10, posicionar dois navios (tamanho 3)
- * e exibir a matriz resultante no console.
+ * Desafio: Tabuleiro Completo e Navios Diagonais (Nível Intermediário)
+ * Objetivo: Posicionar 4 navios de tamanho 3 em um tabuleiro 10x10,
+ * incluindo posicionamentos nas diagonais principal e secundária.
  */
 
 int main() {
-    // 1. Definição do Tabuleiro 10x10
-    // Usamos int para representar: 0 = Água, 3 = Navio
+    // 1. Declaração e Inicialização do Tabuleiro 10x10 com 0 (Água)
     int tabuleiro[10][10];
 
-    // 2. Inicialização do Tabuleiro com 0 (Água)
-    // Utilizamos loops aninhados para percorrer cada linha (i) e coluna (j)
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
             tabuleiro[i][j] = 0;
         }
     }
 
-    // 3. Posicionamento do Navio Horizontal
-    // Escolhemos uma coordenada inicial: Linha 2, Coluna 1
-    // O navio tem tamanho 3, então ocupará (2,1), (2,2) e (2,3)
-    int linhaHorizontal = 2;
-    int colInicialHorizontal = 1;
-    
+    // --- POSICIONAMENTO DOS NAVIOS (Tamanho 3, Valor 3) ---
+
+    // 2. Navio Horizontal
+    // Linha 0, Colunas 0, 1, 2
     for (int j = 0; j < 3; j++) {
-        tabuleiro[linhaHorizontal][colInicialHorizontal + j] = 3;
+        tabuleiro[0][j] = 3;
     }
 
-    // 4. Posicionamento do Navio Vertical
-    // Escolhemos uma coordenada inicial: Linha 5, Coluna 7
-    // O navio tem tamanho 3, então ocupará (5,7), (6,7) e (7,7)
-    int linhaInicialVertical = 5;
-    int colunaVertical = 7;
-
+    // 3. Navio Vertical
+    // Coluna 9, Linhas 7, 8, 9
     for (int i = 0; i < 3; i++) {
-        tabuleiro[linhaInicialVertical + i][colunaVertical] = 3;
+        tabuleiro[7 + i][9] = 3;
     }
 
-    // 5. Exibição do Tabuleiro no Console
-    printf("--- TABULEIRO DE BATALHA NAVAL ---\n\n");
+    // 4. Navio Diagonal 1 (Crescente - Diagonal Principal)
+    // Coordenadas: (4,4), (5,5), (6,6)
+    // Note que linha e coluna aumentam juntas
+    for (int i = 0; i < 3; i++) {
+        tabuleiro[4 + i][4 + i] = 3;
+    }
 
-    // Loop externo para as linhas
+    // 5. Navio Diagonal 2 (Decrescente - Diagonal Secundária)
+    // Coordenadas: (1,8), (2,7), (3,6)
+    // Aqui a linha aumenta e a coluna diminui
+    for (int i = 0; i < 3; i++) {
+        tabuleiro[1 + i][8 - i] = 3;
+    }
+
+    // 6. Exibição do Tabuleiro
+    printf("--- BATALHA NAVAL (NÍVEL INTERMEDIÁRIO) ---\n\n");
+    
+    // Cabeçalho de colunas para facilitar a leitura
+    printf("    0 1 2 3 4 5 6 7 8 9\n");
+    printf("    -------------------\n");
+
     for (int i = 0; i < 10; i++) {
-        // Loop interno para as colunas
+        printf("%d | ", i); // Índice da linha
         for (int j = 0; j < 10; j++) {
-            // Imprime o valor da posição e um espaço para melhor visualização
             printf("%d ", tabuleiro[i][j]);
         }
-        // Após imprimir todas as colunas de uma linha, pula para a próxima
         printf("\n");
     }
 
